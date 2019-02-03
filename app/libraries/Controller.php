@@ -1,11 +1,12 @@
-<?php
+ <?php
 
     class Controller {
-        public function model($model) {
+        public function model($model,$param = NULL) {
             //Require Model
             require_once '../app/models/' . $model . '.php';
             //Instantiate Model
-            return new $model();
+            if($param == NULL) return new $model();
+            else return new $model($param);
         }
 
         public function view($view,$data = []) {

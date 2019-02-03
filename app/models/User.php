@@ -44,13 +44,19 @@
 
             $row = $this->db->single();
 
-            $hashedPassword = $row->password;
+            if($this->db->rowCount() > 0) {
+                $hashedPassword = $row->password;
 
-            if(password_verify($password,$hashedPassword)) {
-                return $row;
+                if(password_verify($password,$hashedPassword)) {
+                    return $row;
+                } else {
+                    return false;   
+                }
             } else {
-                return false;   
+                return false;
             }
+
+            
         }
 
     }

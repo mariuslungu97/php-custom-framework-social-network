@@ -5,6 +5,7 @@
         <div class="col-sm-6">
             <div class="card card-body bg-light mt-5">
                 <?php flash('register_success'); ?>
+                <?php flash('logout-success'); ?>
                 <h2 class="mb-4">Login: </h2>
                 <form method="post" action="<?php echo URLROOT; ?>/users/login">
                     <div class="form-group">

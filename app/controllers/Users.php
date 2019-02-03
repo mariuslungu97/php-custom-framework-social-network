@@ -115,8 +115,8 @@
                     $data['password_err'] = 'Please enter a password.';
                 }
 
-                if($this->userModel->findUserByEmail($data['email'])) {
-                    $data['email_err'] = 'No user has been found. Type your mail again'.
+                if(!$this->userModel->findUserByEmail($data['email'])) {
+                    $data['email_err'] = 'No user has been found. Type your mail again.';
                 }
 
                 if(empty($data['email_err']) && empty($data['password_err'])) {
@@ -125,8 +125,10 @@
                     $loggedInUser = $this->userModel->login($data['email'],$data['password']);
                     if($loggedInUser) {
                         //Create Session Variables
+                        $this->createSessionUser($loggedInUser);
+
                     } else {
-                        $data['password_err'] = 'Password incorrect';
+                        $data['password_err'] = 'Incorrect Password! Please try again.';
                         $this->view('users/login',$data);
                     }
 
@@ -149,6 +151,35 @@
                 $this->view('users/login',$data);
             }
         }
+
+        public function logout() {
+            //Unset Session Variables
+            unset($_SESSION['user_id']);
+            unset($_SESSION['user_email']);
+            unset($_SESSION['user_name']);
+
+            //Display flash message
+            flash('logout-success','You have been logged out succesfully!');
+
+            //Redirect
+            redirect('users/login');
+
+
+        }
+
+        public function createSessionUser($user) {
+            
+
+            $_SESSION['user_id'] = $user->id;
+            $_SESSION['user_email'] = $user->email;
+            $_SESSION['user_name'] = $user->name;
+
+            redirect('posts/index');
+
+            
+        }
+
+        
     }
 
 ?>
