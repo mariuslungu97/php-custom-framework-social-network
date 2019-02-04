@@ -3,6 +3,7 @@
 <div class="container">
     <?php echo flash('add-success'); ?>
     <?php echo flash('edit-success'); ?>
+    <?php echo flash('delete-success'); ?>
 
     <div class="row">
         <div class="col-md-6 posts-col" style="padding : 0;">

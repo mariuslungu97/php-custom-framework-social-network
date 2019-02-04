@@ -147,6 +147,25 @@
             
             
         }
+
+        public function delete($postId) {
+            //Check to see if $postId exists
+            if($this->postModel->postExists($postId)) {
+                //Delete Post
+                if($_SERVER['REQUEST_METHOD'] == 'POST' && $this->postModel->deletePost($postId)) {
+                    flash('delete-success', 'The post has been deleted');
+                    //Redirect to posts/index
+                    redirect('posts');
+                } else {
+                    die('Something went wrong during the deletion process');
+                }
+            } else {
+                //$postId does not exists. Redirect to posts/index
+                redirect('posts');
+            }
+
+            
+        }
     }
 
 ?>
