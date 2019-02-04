@@ -18,7 +18,7 @@
                         <label for="pass">Password: </label>
                         <input type="password" value="<?php echo $data['password']; ?>" class="form-control <?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" name="pass" placeholder="Password">
                         <span class="invalid-feedback"><?php echo $data['password_err']; ?></span>
-                    </div>
+                    </div>  
                     
                     <div class="row my-4">
                         <div class="col">
@@ -33,8 +33,6 @@
             
         </div>
     </div>
-    
-
 </div>
 
 <?php require_once APPROOT . '/views/inc/footer.php'; ?>

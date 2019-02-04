@@ -25,12 +25,12 @@
 
         //Add Post
         public function addPost($data) {
-            $this->dbPost->query("INSERT INTO posts(user_id,title,body) VALUES(:user_id,:title,:body");
+            $this->dbPost->query("INSERT INTO posts(user_id, title, body) VALUES(:user_id, :title, :body)");
             $this->dbPost->bind(':user_id',$this->userId);
             $this->dbPost->bind(':title',$data['title']);
             $this->dbPost->bind(':body',$data['body']);
             
-            if($this->db->execute()) {
+            if($this->dbPost->execute()) {
                 return true;
             } else return false;
            

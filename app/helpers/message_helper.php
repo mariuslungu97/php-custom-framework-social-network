@@ -25,7 +25,9 @@
 
     //Logged In Check
     function isLoggedIn() {
-        if(isset($_SESSION['used_id'])) return true;
+        if(isset($_SESSION['used_id'])) {
+            return true;
+        }
         else return false;
     }
 

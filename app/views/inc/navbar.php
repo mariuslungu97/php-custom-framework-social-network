@@ -9,7 +9,7 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>">Home</a>
+                    <a class="nav-link" href="<?php echo $_SESSION['user_id'] ? URLROOT . '/posts' : URLROOT; ?>">Home</a>
                 </li>
 
                 <li class="nav-item">
