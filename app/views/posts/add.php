@@ -21,9 +21,6 @@
                     <input type="submit" value="Submit" class="btn btn-success" name="add">
                 
                 </form>
-                <?php console_log(isLoggedIn()) ?>
-                <?php console_log(isset($_SESSION['user_id'])); ?>
-
             </div>
             
         

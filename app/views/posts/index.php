@@ -2,6 +2,7 @@
 
 <div class="container">
     <?php echo flash('add-success'); ?>
+    <?php echo flash('edit-success'); ?>
 
     <div class="row">
         <div class="col-md-6 posts-col" style="padding : 0;">
@@ -20,7 +21,7 @@
                         Written by <?php echo $data['name']; ?> on <?php echo $post->created_at; ?>
                     </div>
                     <p class="card-text"><?php echo $post->body; ?></p>
-                    <a class="btn btn-dark" href="<?php echo URLROOT; ?>/posts/show/<?php echo $_SESSION['user_id']; ?>">More</a>
+                    <a class="btn btn-dark" href="<?php echo URLROOT; ?>/posts/show/<?php echo $post->id; ?>">More</a>
                 </div>
         <?php endforeach; ?>
     </div>

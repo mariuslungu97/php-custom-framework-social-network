@@ -23,6 +23,18 @@
             return $post;
         }
 
+        public function postExists($postId) {
+            $this->dbPost->query("SELECT * FROM posts WHERE id = :postId");
+            $this->dbPost->bind(':postId',$postId);
+            $post = $this->dbPost->single();
+
+            if($this->dbPost->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         //Add Post
         public function addPost($data) {
             $this->dbPost->query("INSERT INTO posts(user_id, title, body) VALUES(:user_id, :title, :body)");
@@ -40,22 +52,20 @@
             $this->dbPost->query("DELETE FROM posts WHERE id = :postId");
             $this->dbPost->bind(':postId',$postId);
             
-            if($this->db->execute()) {
+            if($this->dbPost->execute()) {
                 return true;
             } else return false;
         }
 
         //Update Post
         public function updatePost($data) {
-            $instruction = '';
-            foreach($data as $key => $value) {
-                $instruction .= "$key = $value, ";
-            }
-            $instruction = rtrim($instruction,',');
-            $this->dbPost->query("UPDATE posts SET $instruction WHERE user_id = :user_id");
-            $this->dbPost->bind(':user_id',$this->userId);
+            
+            $this->dbPost->query("UPDATE posts SET title=:title, body=:body WHERE id =:id");
+            $this->dbPost->bind(':title',$data['title']);
+            $this->dbPost->bind(':body',$data['body']);
+            $this->dbPost->bind(':id',$data['id']);
 
-            if($this->db->execute()) {
+            if($this->dbPost->execute()) {
                 return true;
             } else return false;
         }
