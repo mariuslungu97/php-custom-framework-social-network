@@ -47,7 +47,7 @@
                 }
 
                 if(empty($data['title_err']) && empty($data['body_err'])) {
-                    //Add Post
+
                     if($this->postModel->addPost($data)) {
                         flash('add-success','The Post has been added.');
 
@@ -67,7 +67,6 @@
                 ];
                 //Load View
                 $this->view('posts/add',$data);
-                //Check for submit button
     
             }
         }
@@ -115,7 +114,7 @@
                     }
     
                     if(empty($data['title_err']) && empty($data['body_err'])) {
-                        //Add Post
+
                         if($this->postModel->updatePost($data)) {
                             $msg = "The Post named: " . $data['title'] . " has been edited";
                             flash('edit-success',$msg);
@@ -125,7 +124,7 @@
                             die('Something went wrong, please try adding the post again');
                         }
                     } else {
-                        //Display view with errors
+
                         $this->view('posts/edit',$data);
                     }
     
@@ -141,7 +140,7 @@
                     $this->view('posts/edit',$data);
                 }
             } else {
-                //Redirect to home page
+
                 redirect('posts');
             }
             
@@ -149,18 +148,18 @@
         }
 
         public function delete($postId) {
-            //Check to see if $postId exists
+
             if($this->postModel->postExists($postId)) {
                 //Delete Post
                 if($_SERVER['REQUEST_METHOD'] == 'POST' && $this->postModel->deletePost($postId)) {
                     flash('delete-success', 'The post has been deleted');
-                    //Redirect to posts/index
+
                     redirect('posts');
                 } else {
                     die('Something went wrong during the deletion process');
                 }
             } else {
-                //$postId does not exists. Redirect to posts/index
+
                 redirect('posts');
             }
 

@@ -7,7 +7,7 @@
             $this->dbPost = new Database;
             $this->userId = $userId;
         }
-        //Get All Posts
+
         public function getPosts() {
             $this->dbPost->query("SELECT * FROM posts WHERE user_id = :user_id");
             $this->dbPost->bind(':user_id',$this->userId);
@@ -15,7 +15,6 @@
             return $posts;
         }
 
-        //Get Specific Post
         public function getPost($postId) {
             $this->dbPost->query("SELECT * FROM posts WHERE id = :postId");
             $this->dbPost->bind(':postId',$postId);
@@ -35,7 +34,6 @@
             }
         }
 
-        //Add Post
         public function addPost($data) {
             $this->dbPost->query("INSERT INTO posts(user_id, title, body) VALUES(:user_id, :title, :body)");
             $this->dbPost->bind(':user_id',$this->userId);
@@ -47,7 +45,6 @@
             } else return false;
            
         }
-        //Remove Post
         public function deletePost($postId) {
             $this->dbPost->query("DELETE FROM posts WHERE id = :postId");
             $this->dbPost->bind(':postId',$postId);
@@ -57,7 +54,6 @@
             } else return false;
         }
 
-        //Update Post
         public function updatePost($data) {
             
             $this->dbPost->query("UPDATE posts SET title=:title, body=:body WHERE id =:id");

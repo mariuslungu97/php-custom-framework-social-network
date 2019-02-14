@@ -2,11 +2,9 @@
 
     class Pages extends Controller {
         public function __construct() {
-            //here you should grab the Pages data
         }
         
         public function index() {
-            //load the index view and pass the $data assoc array coming from the model
             $data = [
                 'title' => 'PostShare Application',
                 'description' => 'Basic Social Network Built with Object-Oriented PHP'
@@ -21,7 +19,6 @@
                 'version' => '1.0.0',
                 'technologyStack' => 'HTML, CSS, PHP 5, PDO'
             ];
-            //load the about view
             $this->view('pages/about',$data);
         }
     }

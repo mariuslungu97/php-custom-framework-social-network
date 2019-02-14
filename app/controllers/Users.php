@@ -1,7 +1,7 @@
 <?php
 
     class Users extends Controller {        
-        //Either handles the form submission or loads the form page
+
         private $userModel;
         public function __construct() {
             $this->userModel = $this->model('User');
@@ -10,9 +10,9 @@
         public function register() {
             //Check if form has been submitted
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                //sanitize all strings in the $_POST array
+
                 $_POST = filter_var_array($_POST,FILTER_SANITIZE_STRING);
-                //Grab Input Data
+
                 $data = [
                     'name' => trim($_POST['name']),
                     'email' => trim($_POST['email']),
@@ -24,23 +24,20 @@
                     'confirm_password_err' => ''
                 ]; 
 
-                //Validate Name
                 if(empty($_POST['name'])) {
                     $data['name_err'] = 'Please fill in your name.';
                 };
 
-                //Validate Email
                 if(empty($_POST['email'])) {
                     $data['email_err'] = 'Please enter your email.';
+
                 } else {
-                    //Check if email already exists
-                    
+
                     if($this->userModel->findUserByEmail($data['email'])) {
                         $data['email_err'] = 'The email already exists in our database.';
                     }
                 }
 
-                //Validate Password
                 if(empty($_POST['pass'])) {
                     $data['password_err'] = 'Please enter a password.';
                 } elseif(strlen($_POST['pass']) < 6) {
@@ -51,7 +48,6 @@
                     }   
                 };
 
-                //Validate Name
                 if(empty($_POST['confirm-pass'])) {
                     $data['confirm_password_err'] = 'Please re-enter your password.';
                 };
@@ -60,7 +56,6 @@
                 if(empty($data['name_err']) && empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])) {
                     //No Error, Store Data in the DB
                     
-                    //Encrypt Password
                     $data['password'] = password_hash($data['password'],PASSWORD_DEFAULT);
 
                     //Check if user has been registered
@@ -87,7 +82,7 @@
                     'password_err' => '',
                     'confirm_password_err' => ''
                 ];
-                //load view
+
                 $this->view('users/register',$data);
             }
         }
@@ -105,12 +100,10 @@
                     
                 ]; 
 
-                //Validate Email
                 if(empty($_POST['email'])) {
                     $data['email_err'] = 'Please enter your email.';
                 } 
 
-                //Validate Password
                 if(empty($_POST['pass'])) {
                     $data['password_err'] = 'Please enter a password.';
                 }

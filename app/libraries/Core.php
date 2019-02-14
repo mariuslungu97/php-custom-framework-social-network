@@ -1,6 +1,6 @@
 <?php
 
-/* Application Core Class
+/* 
    URL Format - /controller/method/params
    Ex: /pages/login/1
 */
@@ -11,7 +11,7 @@ class Core {
     protected $params = [];
 
     public function __construct() {
-        //get URL
+
         $url = $this->getUrl();
 
         //Check to see if Controller name exists
@@ -21,7 +21,7 @@ class Core {
         }
         //Import Controller Class
         require_once '../app/controllers/' . $this->currentController . '.php';
-        //Create an instance of that Controller Class
+
         $this->currentController = new $this->currentController;
 
         //Get Method
@@ -29,7 +29,7 @@ class Core {
             $this->currentMethod = $url[1];
             unset($url[1]);
         }
-        //Get Params
+
         $this->params = $url ? array_values($url) : [];
 
         call_user_func_array([$this->currentController,$this->currentMethod],$this->params);
@@ -38,13 +38,13 @@ class Core {
     //grab the URL
     public function getUrl() {
         if(isset($_GET['url'])) {
-            //remove the last '/' of the URL, if one
+
             $url = rtrim($_GET['url'],'/');
-            //sanitize the URL
+
             $url = filter_var($url,FILTER_SANITIZE_URL);
-            //retrieve and split the URL string
+
             $url = explode('/',$url);
-            //return URL
+
             return $url;
         }
     }
