@@ -4,7 +4,7 @@ Basic Social Network using a custom Model-View-Controller Framework in PHP.
 The used MVC framework has been developed from scratch, using .htaccess for a basic redirect functionality. The framework does contain a 
 base "library" sub-directory, where all core classes do reside. The "Core" class ( app/libraries/Core.php ) does contain the functionality
 for splitting the URL into an array which will be used to identify the desired controller and method to be called.
-Ex: www.shareposts.com/pages/index ( Pages controller, index method ).
+Ex: ".../pages/index" ( Pages controller, index method ).
 
 The "Database" core library class ( app/libraries/Database.php ) abstracts the interaction with the MySQL database with PHP Data Objects extension, and makes it easier 
 for users of this framework to perform CRUD operations to the database.
